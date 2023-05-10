@@ -1,3 +1,6 @@
+[build-system]
+requires = ["setuptools ~= 58.0", "cython ~= 0.29.0"]
+
 [tool.ruff]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
 select = ["E", "F"]

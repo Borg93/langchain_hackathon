@@ -1,5 +1,5 @@
 create_env:
-	python -m venv langchain
+	python -m venv venv
 
 activate: 
 	source langchain/bin/activate
