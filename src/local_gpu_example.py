@@ -2,7 +2,7 @@ from langchain import HuggingFaceHub
 from langchain import PromptTemplate, LLMChain
 from dotenv import dotenv_values
 
-token_config = dotenv_values(".env")
+token_config = dotenv_values("../.env")
 
 repo_id = "databricks/dolly-v2-3b"
 

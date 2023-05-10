@@ -3,3 +3,4 @@ openai
 huggingface_hub
 python-dotenv
 ruff
+duckduckgo-search
