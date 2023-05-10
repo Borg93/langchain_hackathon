@@ -6,7 +6,11 @@ token_config = dotenv_values(".env")
 
 repo_id = "databricks/dolly-v2-3b"
 
-llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature":0, "max_length":64}, huggingfacehub_api_token=token_config['HF_TOKEN'])
+llm = HuggingFaceHub(
+    repo_id=repo_id,
+    model_kwargs={"temperature": 0, "max_length": 64},
+    huggingfacehub_api_token=token_config["HF_TOKEN"],
+)
 
 template = """Question: {question}
 
