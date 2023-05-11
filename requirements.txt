@@ -4,3 +4,8 @@ huggingface_hub
 python-dotenv
 ruff
 duckduckgo-search
+wikipedia
+tiktoken
+pinecone-client
+datasets
+tqdm
