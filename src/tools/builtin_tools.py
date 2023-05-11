@@ -7,7 +7,7 @@ from langchain.chat_models import ChatOpenAI
 from dotenv import dotenv_values
 
 
-def wiki_repl_search_agent(llm, prompt):
+def wiki_repl_search_tool():
     wikipedia = WikipediaAPIWrapper()
     python_repl = PythonREPL()
     search = DuckDuckGoSearchRun()
@@ -35,15 +35,7 @@ def wiki_repl_search_agent(llm, prompt):
     tools.append(duckduckgo_tool)
     tools.append(wikipedia_tool)
 
-    zero_shot_agent = initialize_agent(
-        agent="zero-shot-react-description",
-        tools=tools,
-        llm=llm,
-        verbose=True,
-        max_iterations=3,
-    )
-
-    zero_shot_agent.run(prompt)
+    return tools
 
 
 if __name__ == "__main__":
@@ -55,8 +47,21 @@ if __name__ == "__main__":
         verbose=True,
         temperature=0,
         max_tokens=2000,
-        frequency_penalty=0,
-        presence_penalty=0,
-        top_p=1.0,
+        # frequency_penalty=0,
+        # presence_penalty=0,
+        # top_p=1.0,
     )
-    wiki_repl_search_agent(llm=chat, prompt="vad heter finska riksarkivet på finska?")
+    tools = wiki_repl_search_tool()
+
+    zero_shot_agent = initialize_agent(
+        agent="zero-shot-react-description",
+        tools=tools,
+        llm=chat,
+        verbose=True,
+        max_iterations=3,
+    )
+
+    print()
+    print(zero_shot_agent.agent.llm_chain.prompt.template)
+    quit()
+    zero_shot_agent.run("vad heter finska riksarkivet på finska?")

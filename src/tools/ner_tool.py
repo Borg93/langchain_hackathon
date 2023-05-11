@@ -29,3 +29,6 @@ tools = [NerTool()]
 # TODO: return tools
 # https://www.youtube.com/watch?v=q-HNphrWsDE
 # should i use abstract claasses ? https://gradio.app/gradio-and-llm-agents/
+
+if __name__ == "__main__":
+    pass
