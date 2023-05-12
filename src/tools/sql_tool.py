@@ -49,14 +49,12 @@ def sql_visit_tool(llm):
         insert_obs(obs, visits_table, engine)
 
     db = SQLDatabase(engine)
-    sql_chain = SQLDatabaseChain(llm=llm, database=db, verbose=True)
+    sql_chain = SQLDatabaseChain(llm=llm, database=db)
 
     sql_tool = Tool(
         name="Archive Visit DB",
         func=sql_chain.run,
-        description="Useful for when you need to answer questions about visits in the archives between Sweden and Finland. \
-            the table specify how many people have visits in some certains dates \
-            and can also answer question about the date archive_visit table",
+        description="Useful for when you need to answer questions about number of visits and the dates of visit in the archives for both Sweden and Finland",
     )
 
     tools = load_tools(["llm-math"], llm=llm)
@@ -72,7 +70,7 @@ if __name__ == "__main__":
     chat = ChatOpenAI(
         openai_api_key=token_config["OPENAI_API_KEY"],
         model_name="gpt-3.5-turbo",
-        verbose=True,
+        # verbose=True,
         temperature=0,
         max_tokens=2000,
         # frequency_penalty=0,
@@ -86,10 +84,10 @@ if __name__ == "__main__":
         tools=sql_tool,
         llm=chat,
         verbose=False,
-        max_iterations=1,
+        max_iterations=3,
         early_stopping_method="generate",
     )
 
     sql_agent.run(
-        input="How many people have visit the national archives in 'Sweden'? Can you please summary the total"
+        input="What is the number of visits to Sweden's archives? Only answer the number in total."
     )

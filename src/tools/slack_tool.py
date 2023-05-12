@@ -1,0 +1,1 @@
+https://github.com/derekarends/openai-demos/blob/main/langchain_learnings/tools/slack/slack_tool.py

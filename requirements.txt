@@ -9,3 +9,9 @@ tiktoken
 pinecone-client
 datasets
 tqdm
+bertopic
+gradio
+pandas
+sentence_transformers
+umap
+"pinecone-client[grpc]"

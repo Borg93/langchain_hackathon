@@ -61,7 +61,7 @@ if __name__ == "__main__":
         max_iterations=3,
     )
 
-    print()
-    print(zero_shot_agent.agent.llm_chain.prompt.template)
-    quit()
+    # print()
+    # print(zero_shot_agent.agent.llm_chain.prompt.template)
+    # quit()
     zero_shot_agent.run("vad heter finska riksarkivet på finska?")

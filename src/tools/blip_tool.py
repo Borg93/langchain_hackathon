@@ -1,0 +1,1 @@
+https://github.com/pinecone-io/examples/blob/master/generation/langchain/handbook/07-langchain-tools.ipynb
