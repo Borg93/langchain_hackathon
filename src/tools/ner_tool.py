@@ -13,7 +13,7 @@ class NerTool(BaseTool):
         token_config = dotenv_values("../../.env")
 
         API_URL = "https://api-inference.huggingface.co/models/dslim/bert-base-NER"
-        headers = {"Authorization": f"Bearer {token_config["HF_TOKEN"]}"}
+        headers = {"Authorization": f"Bearer {token_config['HF_TOKEN']}"}
 
         def query(payload):
             response = requests.post(API_URL, headers=headers, json=payload)
@@ -30,9 +30,11 @@ class NerTool(BaseTool):
     def _arun(self, query: str):
         raise NotImplementedError("This tool does not support async")
 
+
 def ner_tool():
     tools = [NerTool()]
     return tools
+
 
 if __name__ == "__main__":
     token_config = dotenv_values("../../.env")

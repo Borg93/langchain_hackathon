@@ -116,14 +116,14 @@ if __name__ == "__main__":
         tools=tools,
         llm=chat,
         verbose=True,
-        max_iterations=2,
+        max_iterations=3,
         early_stopping_method="generate",
     )
 
-    api_agent.run(
-        "Can you find some data about Sweden? limit to one file and return item id"
-    )
-
     # api_agent.run(
-    #     "Can you get data from the webpage: https://portal.ehri-project.eu/help/faq#kix.cp2341mudsau and answer what ehri is?"
+    #     "Can you find some data about Sweden? limit to one file and return item id"
     # )
+
+    api_agent.run(
+        "Can you get data from the webpage: https://portal.ehri-project.eu/help/faq#kix.cp2341mudsau and answer what ehri is?"
+    )

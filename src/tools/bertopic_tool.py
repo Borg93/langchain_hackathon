@@ -9,14 +9,13 @@ from bertopic import BERTopic
 import pandas as pd
 from umap import UMAP
 from sentence_transformers import SentenceTransformer
+from bertopic import BERTopic
+from sklearn.datasets import fetch_20newsgroups
 
 
 class BertTopic(BaseTool):
     name = ""
     description = ""
-
-    def __init__(self):
-        pass
 
     def _run(self, text: str):
         pass
@@ -37,49 +36,33 @@ Similarly, a child or baby whose identity is unknown may be referred to as Baby 
 
     """
 
-    # df = pd.read_parquet("./data/motioner_2014_2021.parquet")
-    # print(f"The dataset consists of a total of {len(df)} motions.")
-    # df.head()  # Display only the 5 first rows of the dataframe
+    df = pd.read_parquet("./data/motioner_2014_2021.parquet")
+    print(f"The dataset consists of a total of {len(df)} motions.")
+    df.head()  # Display only the 5 first rows of the dataframe
 
-    # documents = df["text"].tolist()
+    documents = df["text"].tolist()
 
-    # umap_model = UMAP(
-    #     n_neighbors=15, n_components=5, min_dist=0.0, metric="cosine", random_state=1337
-    # )
+    umap_model = UMAP(
+        n_neighbors=15, n_components=5, min_dist=0.0, metric="cosine", random_state=1337
+    )
 
-    # # Load KBLab's Swedish sentence transformer model
-    # sentence_model = SentenceTransformer(
-    #     "KBLab/sentence-bert-swedish-cased", device="cuda"
-    # )
+    # Load KBLab's Swedish sentence transformer model
+    sentence_model = SentenceTransformer("KBLab/sentence-bert-swedish-cased")
 
-    # # Initialize BERTopic with the settings we want
-    # topic_model = BERTopic(
-    #     embedding_model=sentence_model,
-    #     umap_model=umap_model,
-    #     calculate_probabilities=True,
-    #     verbose=True,
-    #     diversity=0.5,
-    # )
+    # Initialize BERTopic with the settings we want
+    topic_model = BERTopic(
+        embedding_model=sentence_model,
+        umap_model=umap_model,
+        calculate_probabilities=True,
+        verbose=True,
+        # diversity=0.5,
+    )
 
-    # # Fit the model
-    # topics, probs = topic_model.fit_transform(documents)
+    # Fit the model
+    topics, probs = topic_model.fit_transform(documents)
 
-    my_api_key = "KnDKisUqybMVhdOWgTgUGXaHyU6mv6GTTZLqgfXc"
+    topic_model.get_topic_info()
 
-    import cohere
-    from bertopic.representation import Cohere
-    from bertopic import BERTopic
-
-    # Create your representation model
-    co = cohere.Client(my_api_key)
-    representation_model = Cohere(co)
-
-    # Use the representation model in BERTopic on top of the default pipeline
-    topic_model = BERTopic(representation_model=representation_model)
-
-    prompt = f"I have the following documents: [{docs}]. What topic do they contain?"
-    representation_model = Cohere(co, prompt=prompt)
-    print(representation_model)
     quit()
 
     chat = ChatOpenAI(
@@ -102,4 +85,4 @@ Similarly, a child or baby whose identity is unknown may be referred to as Baby 
     topic_model = BERTopic(representation_model=representation_model)
     print(topic_model)
 
-    https://colab.research.google.com/drive/10kB3wfoHSfZE48vEKmznIw-ff36uR8gs?usp=sharing#scrollTo=8NIfF1S6ayQt
+    # https://colab.research.google.com/drive/10kB3wfoHSfZE48vEKmznIw-ff36uR8gs?usp=sharing#scrollTo=8NIfF1S6ayQt

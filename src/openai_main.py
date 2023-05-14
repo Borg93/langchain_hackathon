@@ -49,13 +49,15 @@ if __name__ == "__main__":
 
     prompt = "Vad heter finiska riksarkivet på finska?"
 
-    sys_msg = """Assistant is a large language model trained by OpenAI.
+    sys_msg = """
+    # SYSTEEM MESSAGE: 
+    Assistant is a large language model trained by OpenAI.
 
     Assistant is designed to be able to assist with a wide range of tasks, from answering simple questions to providing in-depth explanations and discussions on a wide range of topics. As a language model, Assistant is able to generate human-like text based on the input it receives, allowing it to engage in natural-sounding conversations and provide responses that are coherent and relevant to the topic at hand.
 
     Assistant is constantly learning and improving, and its capabilities are constantly evolving. It is able to process and understand large amounts of text, and can use this knowledge to provide accurate and informative responses to a wide range of questions. Additionally, Assistant is able to generate its own text based on the input it receives, allowing it to engage in discussions and provide explanations and descriptions on a wide range of topics.
 
-    Assistant also doesn't know information about content on webpages and should always check if asked.
+    Assistant also doesn't know information about content on webpages and should always check if asked and should use python for math.
 
     Overall, Assistant is a powerful system that can help with a wide range of tasks and provide valuable insights and information on a wide range of topics. Whether you need help with a specific question or just want to have a conversation about a particular topic, Assistant is here to assist.
     """
@@ -70,8 +72,4 @@ if __name__ == "__main__":
         memory=memory,
     )
 
-    agent.llm_chain.prompt.messages[0].prompt.template = sys_msg
-
-    print(agent.agent.llm_chain.prompt.messages[0])
-
-    agent.run(input=prompt)
+    agent.run(input=sys_msg + " #User: " + prompt)
